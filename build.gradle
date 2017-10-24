@@ -1,0 +1,43 @@
+group 'com.manciti'
+version '0.1'
+
+buildscript {
+    ext.kotlin_version = '1.1.51'
+
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'kotlin'
+apply plugin: 'application'
+apply plugin: 'distribution'
+
+sourceCompatibility = 1.8
+mainClassName='com.manciti.chatserver.Server'
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
+    compile "org.jetbrains.kotlinx:kotlinx-coroutines-core:0.18"
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+
+kotlin.experimental{
+    coroutines 'enable'
+}
